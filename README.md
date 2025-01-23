@@ -13,22 +13,23 @@ By integrating affordable and accessible components like the Raspberry Pi and HC
 - Customizable and scalable design.
 
 ## Components Used
-1. **Raspberry Pi** (e.g., Raspberry Pi 4 Model B)
-   - [Official Raspberry Pi Website](https://www.raspberrypi.com/products/)
-2. **Ultrasonic Distance Sensor** (e.g., HC-SR04)
+1. **Raspberry Pi Zero**
+   - [Raspberry Pi Zero Official Page](https://www.raspberrypi.com/products/raspberry-pi-zero/)
+2. **1.8" TFT Display**
+   - [Adafruit 1.8" TFT Display Guide](https://www.az-delivery.de/products/1-8-zoll-spi-tft-display)
+3. **Ultrasonic Distance Sensor** (e.g., HC-SR04)
    - [HC-SR04 Datasheet](https://www.electroschematics.com/hc-sr04-datasheet/)
-3. **LEDs** (various colors for range indication)
-   - [LED Basics and Guide](https://www.sparkfun.com/led-guide)
-4. **Resistors** (for current limiting)
-   - [Resistor Calculator](https://ohmslawcalculator.com/)
-5. **Jumper Wires** (for connections)
+4. **LEDs** (various colors for range indication)
+   - [LED Basics and Guide](https://at.rs-online.com/web/p/leds/2285821?cm_mmc=AT-PLA-DS3A-_-google-_-CSS_AT_DE_Pmax_Test-_--_-2285821&matchtype=&&gad_source=1&gclid=Cj0KCQiA7se8BhCAARIsAKnF3rznNKA2HxQ9wTGR13j7zl4i7LzCYaMpnD7EsVWj06SVfzmgmllRapkaAu71EALw_wcB&gclsrc=aw.ds)
+5. **Resistors** (for current limiting)
+   - [Resistor Calculator](https://at.rs-online.com/web/p/durchsteckwiderstande/1987413?gb=s)
+6. **Jumper Wires** (for connections)
    - [Amazon Jumper Wires](https://www.amazon.com/s?k=jumper+wires)
-6. **Breadboard** (for prototyping)
+7. **Breadboard** (for prototyping)
    - [Breadboard Basics](https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard/all)
 
 ## Setup
 1. Connect the Raspberry Pi to the sensor and LEDs.
 2. Clone the repository.
 3. Run the Python script.
-
 
