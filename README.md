@@ -18,7 +18,7 @@ Detailed documentation ensures that users can set up and adapt the system with e
 
 ## Features
 - Accurate distance measurement using an ultrasonic sensor.
-- Real-time display of results on an OLED or TFT screen.
+- Real-time display of results on an OLED screen.
 - LED indicators for predefined distance ranges:
   - **LED 1**: Lights up for distances under 1 meter.
   - **LED 2**: Lights up for distances 1 meter or more.
@@ -85,7 +85,7 @@ Detailed documentation ensures that users can set up and adapt the system with e
 ### Hardware Configuration
 1. Connect the **ultrasonic sensor** to the Raspberry Pi Zero's GPIO pins.
 2. Wire the LEDs to GPIO pins with appropriate resistors for current limiting.
-3. Connect the **TFT display** to the Raspberry Pi using SPI or I2C.
+3. Connect the **OLED display** to the Raspberry Pi using SPI or I2C.
 4. Enable SPI on the Raspberry Pi:
    ```bash
    sudo raspi-config
@@ -125,7 +125,7 @@ The following diagram illustrates the hardware connections for the project:
    ```
 
 ### System Behavior
-- The distance will be measured in real time and displayed on the TFT or OLED display.
+- The distance will be measured in real time and displayed on the OLED display.
 - The LEDs will indicate the range based on the measured distance:
   - **LED 1**: Lights up if the distance is **< 1 meter**.
   - **LED 2**: Lights up if the distance is **≥ 1 meter**.
