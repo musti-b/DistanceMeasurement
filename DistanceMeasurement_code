@@ -1,0 +1,170 @@
+import RPi.GPIO as GPIO  # Für die Steuerung der GPIO-Pins
+
+import time  # Für Zeitfunktionen
+
+from PIL import Image, ImageDraw, ImageFont  # Für die Anzeige auf dem TFT-Display
+
+import adafruit_st7735r  # Bibliothek für das 1.8" TFT Display
+
+import board
+
+import digitalio
+ 
+# Pins für den HC-SR04 Sensor
+
+TRIG = 23  # Pin für das TRIG-Signal
+
+ECHO = 24  # Pin für das ECHO-Signal
+ 
+# Pins für die LEDs
+
+LED1 = 17  # GPIO-Pin für LED1
+
+LED2 = 27  # GPIO-Pin für LED2
+ 
+# Display-Pins konfigurieren
+
+cs_pin = digitalio.DigitalInOut(board.D8)  # Chip-Select (CS)
+
+dc_pin = digitalio.DigitalInOut(board.D22)  # Daten-/Befehlspin (DC)
+
+reset_pin = digitalio.DigitalInOut(board.D25)  # Reset-Pin (RESET)
+ 
+# SPI-Schnittstelle initialisieren
+
+spi = board.SPI()
+
+display = adafruit_st7735r.ST7735R(spi, cs=cs_pin, dc=dc_pin, rst=reset_pin, width=128, height=160)
+ 
+# Bild für das TFT-Display erstellen
+
+width = display.width
+
+height = display.height
+
+image = Image.new("RGB", (width, height))  # Farbtiefe RGB
+
+draw = ImageDraw.Draw(image)
+ 
+# Schriftart laden
+
+font = ImageFont.load_default()
+ 
+# GPIO-Modus auf BCM einstellen
+
+GPIO.setmode(GPIO.BCM)
+ 
+# TRIG als Ausgang und ECHO als Eingang festlegen
+
+GPIO.setup(TRIG, GPIO.OUT)
+
+GPIO.setup(ECHO, GPIO.IN)
+ 
+# LEDs als Ausgang festlegen
+
+GPIO.setup(LED1, GPIO.OUT)
+
+GPIO.setup(LED2, GPIO.OUT)
+ 
+# TRIG auf LOW setzen
+
+GPIO.output(TRIG, False)
+
+print("Warte auf Stabilisierung...")
+
+time.sleep(2)  # 2 Sekunden warten
+ 
+try:
+
+    while True:  # Endlosschleife
+
+        # TRIG-Signal senden
+
+        GPIO.output(TRIG, True)
+
+        time.sleep(0.00001)  # 10 Mikrosekunden warten
+
+        GPIO.output(TRIG, False)
+ 
+        # Startzeit des Signals
+
+        while GPIO.input(ECHO) == 0:
+
+            pulse_start = time.time()
+ 
+        # Endzeit des Signals
+
+        while GPIO.input(ECHO) == 1:
+
+            pulse_end = time.time()
+ 
+        # Signalzeit berechnen
+
+        pulse_duration = pulse_end - pulse_start
+ 
+        # Entfernung berechnen (Schallgeschwindigkeit 34300 cm/s)
+
+        distance = pulse_duration * 17150
+
+        distance = round(distance, 2)  # Auf 2 Nachkommastellen runden
+ 
+        # Ergebnis ausgeben
+
+        print(f"Entfernung: {distance} cm")
+ 
+        # LEDs basierend auf der Entfernung steuern
+
+        if distance < 100:
+
+            GPIO.output(LED1, GPIO.HIGH)
+
+            GPIO.output(LED2, GPIO.LOW)
+
+        else:
+
+            GPIO.output(LED1, GPIO.LOW)
+
+            GPIO.output(LED2, GPIO.HIGH)
+ 
+        # Auf dem TFT-Display anzeigen
+
+        draw.rectangle((0, 0, width, height), fill=(0, 0, 0))  # Hintergrund schwarz
+
+        draw.text((10, 60), "Entfernung:", font=font, fill=(255, 255, 255))  # Text in Weiß
+
+        draw.text((10, 90), f"{distance} cm", font=font, fill=(255, 255, 255))  # Entfernung in Weiß
+
+        display.image(image)
+ 
+        time.sleep(1)  # 1 Sekunde warten
+ 
+except KeyboardInterrupt:  # Beenden mit Strg+C
+
+    print("Programm beendet")
+
+    GPIO.cleanup()  # GPIO-Pins zurücksetzen
+
+ 
+1. SA - Übungen Unbearbeitet (1).pdf
+ 
+sudo apt update
+
+sudo apt upgrade -y
+
+ 
+um python 3.10 auf dem rapsberry zu installieren:
+sudo apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev curl libbz2-dev
+
+curl -O https://www.python.org/ftp/python/3.10.9/Python-3.10.9.tgz
+
+tar -xf Python-3.10.9.tgz
+
+cd Python-3.10.9
+
+./configure --enable-optimizations
+
+make -j $(nproc)
+
+sudo make altinstall
+
+ 
