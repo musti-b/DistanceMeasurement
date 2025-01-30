@@ -28,7 +28,7 @@ Detailed documentation ensures that users can set up and adapt the system with e
 ## Components Used
 1. **Raspberry Pi Zero**
    - [Raspberry Pi Zero Official Page](https://www.raspberrypi.com/products/raspberry-pi-zero/)
-2. **1.8" TFT Display**
+2. **1.8" TFT Display** (or OLED display as an alternative)
    - [Adafruit 1.8" TFT Display Guide](https://www.az-delivery.de/products/1-8-zoll-spi-tft-display)
 3. **Ultrasonic Distance Sensor** (e.g., HC-SR04)
    - [HC-SR04 Datasheet](https://www.electroschematics.com/hc-sr04-datasheet/)
@@ -41,7 +41,6 @@ Detailed documentation ensures that users can set up and adapt the system with e
 7. **Breadboard** (for prototyping)
    - [Breadboard Basics](https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard/all)
 
-     
 ## Setup
 
 ### System Update and Preparation
@@ -96,13 +95,21 @@ Detailed documentation ensures that users can set up and adapt the system with e
 The following diagram illustrates the hardware connections for the project:
 
 #### System Overview
-![image](https://github.com/user-attachments/assets/953be046-80f2-4230-a48c-233fccf62bac)
+![image](https://github.com/user-attachments/assets/d5e0348d-e3e6-413b-800a-8c15430dc286)
 
+- **Ultrasonic Sensor**: Measures distance and sends the value to the Raspberry Pi Zero.
+- **Raspberry Pi Zero**: Processes the distance data and controls the output.
+- **LEDs**: Indicate distance ranges depending on the measured value.
+  - **LED 1**: Lights up for distances below 1 meter.
+  - **LED 2**: Lights up for distances equal to or greater than 1 meter.
+- **OLED Display**: Shows the measured distance in real-time.
+- **PC Connection**: Allows the measured values to be displayed on a PC for additional processing or monitoring.
 
 #### Wiring Diagram
-<img width="484" alt="bild1" src="https://github.com/user-attachments/assets/01bfd149-a2d7-437b-adae-2132465db970" />
+![image](https://github.com/user-attachments/assets/35d44442-e018-43f4-beb3-121a6cb7eaf1)
 
 ### Connection Table
+![image](https://github.com/user-attachments/assets/6b9ea8e7-44de-404c-ba29-5c20a131fc14)
 
 
 ### Software Setup
@@ -126,3 +133,5 @@ The following diagram illustrates the hardware connections for the project:
 ### Optional Enhancements
 - Modify the `config.py` file to adjust the distance thresholds or LED behaviors.
 - Enable PC communication for advanced data visualization or remote control.
+
+
